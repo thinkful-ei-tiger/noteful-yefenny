@@ -1,23 +1,7 @@
 .notesList li {
     list-style: none;
-    border: 1px solid black;
     padding: 10px;
     margin-right: 10px;
 }
 
-.notesList li h2 {
-    font-size: 18px;
-}
-.notesList li a{
-    text-decoration: none;
-    color: black;
-}
 
-.noteInfo {
-    display: flex;
-    flex-direction: row;
-}
-
-.noteInfo span {
-    font-size: 12px;
-}

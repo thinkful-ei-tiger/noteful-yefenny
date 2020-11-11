@@ -1,22 +1,6 @@
 .note {
     padding: 10px;
 }
-.noteCard{
-    border: 1px solid black;
-    padding: 10px;
-    margin-right: 10px;
-}
-
-.noteCard  h2 {
-    font-size: 18px;
-}
 
 
-.noteInfo {
-    display: flex;
-    flex-direction: row;
-}
 
-.noteInfo span {
-    font-size: 12px;
-}

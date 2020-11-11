@@ -1,0 +1,26 @@
+
+.noteCard{
+    border: 1px solid black;
+    padding: 10px;
+    margin-right: 10px;
+  
+}
+
+.noteCard  h2 {
+    font-size: 18px;
+}
+
+.noteCard a {
+    text-decoration: none;
+    color: black;
+}
+
+.noteInfo {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.noteInfo span {
+    font-size: 12px;
+}
