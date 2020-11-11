@@ -16,3 +16,7 @@ export default function NoteCard(props) {
     </div>
   );
 }
+
+NoteCard.defaultProps = {
+  note: {}
+};
