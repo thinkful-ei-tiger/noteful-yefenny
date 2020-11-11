@@ -10,7 +10,7 @@ export default function MainNotes(props) {
           <Link to={`/note/${note.id}`}>
             <h2>{note.name}</h2>
           </Link>
-          <div className='noteCard'>
+          <div className='noteInfo'>
             <span> Date modified on {note.modified}</span>
             <button> Delete Note</button>
           </div>

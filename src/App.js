@@ -5,6 +5,8 @@ import STORE from './dummy-store';
 import Header from './header/header';
 import MainSideBar from './mainSideBar/mainSideBar';
 import MainNotes from './mainNotes/mainNotes';
+import BackBar from './backBar/backBar';
+import Note from './note/note';
 import './App.css';
 
 class App extends Component {
@@ -38,6 +40,12 @@ class App extends Component {
                 return <MainSideBar folders={this.state.folders} />;
               }}
             />
+            <Route
+              path='/note/:noteID'
+              render={({ history }) => {
+                return <BackBar goBack={() => history.push('/')} />;
+              }}
+            />
           </nav>
           <section>
             <Route
@@ -53,6 +61,18 @@ class App extends Component {
                     notes={this.state.notes.filter(
                       (note) =>
                         note.folderId === routeProps.match.params.folderId
+                    )}
+                  />
+                );
+              }}
+            />
+            <Route
+              path='/note/:noteId'
+              render={(routeProps) => {
+                return (
+                  <Note
+                    note={this.state.notes.find(
+                      (note) => note.id === routeProps.match.params.noteId
                     )}
                   />
                 );
