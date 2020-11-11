@@ -6,7 +6,7 @@ export default function BackBar(props) {
   return (
     <input
       type='button'
-      onClick={() => props.goBack()}
+      onClick={() => props.history.push('/')}
       className='back-button'
       value='Go back'
     />

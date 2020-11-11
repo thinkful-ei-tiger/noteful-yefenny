@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import { Route, Link } from 'react-router-dom';
 import STORE from './dummy-store';
+import NotefulContext from './NotefulContext';
 import Header from './header/header';
 import MainSideBar from './mainSideBar/mainSideBar';
 import MainNotes from './mainNotes/mainNotes';
@@ -17,6 +18,11 @@ class App extends Component {
       notes: []
     };
   }
+  deleteNote = (id) => {
+    this.setState({
+      notes: this.state.notes.filter((note) => note.id !== id)
+    });
+  };
   componentDidMount() {
     this.setState({
       folders: STORE.folders,
@@ -24,63 +30,29 @@ class App extends Component {
     });
   }
   render() {
+    const contextValue = {
+      folders: this.state.folders,
+      notes: this.state.notes,
+      deleteNote: this.deleteNote
+    };
     return (
-      <div className='App'>
-        <Header />
-        <main className='Main'>
-          <nav>
-            <Route
-              exact
-              path='/'
-              render={() => <MainSideBar folders={this.state.folders} />}
-            />
-            <Route
-              path='/folder/:folderId'
-              render={(routeProps) => {
-                return <MainSideBar folders={this.state.folders} />;
-              }}
-            />
-            <Route
-              path='/note/:noteID'
-              render={({ history }) => {
-                return <BackBar goBack={() => history.push('/')} />;
-              }}
-            />
-          </nav>
-          <section>
-            <Route
-              exact
-              path='/'
-              render={() => <MainNotes notes={this.state.notes} />}
-            />
-            <Route
-              path='/folder/:folderId'
-              render={(routeProps) => {
-                return (
-                  <MainNotes
-                    notes={this.state.notes.filter(
-                      (note) =>
-                        note.folderId === routeProps.match.params.folderId
-                    )}
-                  />
-                );
-              }}
-            />
-            <Route
-              path='/note/:noteId'
-              render={(routeProps) => {
-                return (
-                  <Note
-                    note={this.state.notes.find(
-                      (note) => note.id === routeProps.match.params.noteId
-                    )}
-                  />
-                );
-              }}
-            />
-          </section>
-        </main>
-      </div>
+      <NotefulContext.Provider value={contextValue}>
+        <div className='App'>
+          <Header />
+          <main className='Main'>
+            <nav>
+              <Route exact path='/' component={MainSideBar} />
+              <Route path='/folder/:folderId' component={MainSideBar} />
+              <Route path='/note/:noteID' component={BackBar} />
+            </nav>
+            <section>
+              <Route exact path='/' component={MainNotes} />
+              <Route path='/folder/:folderId' component={MainNotes} />
+              <Route path='/note/:noteId' component={Note} />
+            </section>
+          </main>
+        </div>
+      </NotefulContext.Provider>
     );
   }
 }
