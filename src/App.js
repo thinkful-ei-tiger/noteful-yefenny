@@ -24,10 +24,23 @@ class App extends Component {
     });
   };
   componentDidMount() {
-    this.setState({
-      folders: STORE.folders,
-      notes: STORE.notes
-    });
+    fetch(`http://localhost:9090/db`)
+      .then((res) => {
+        if (!res.ok) {
+          res.json();
+          throw new Error(res.statusText);
+        }
+        return res.json();
+      })
+      .then((data) => {
+        this.setState({
+          folders: data.folders,
+          notes: data.notes
+        });
+      })
+      .catch((error) => {
+        console.log(error.message);
+      });
   }
   render() {
     const contextValue = {
