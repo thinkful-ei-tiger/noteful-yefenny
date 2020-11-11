@@ -1,0 +1,10 @@
+.appHeader{
+
+    text-align: center;
+    
+  }
+
+  .appHeader a {
+      text-decoration: none;
+      color: black;
+  }
