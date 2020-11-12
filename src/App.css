@@ -9,10 +9,12 @@
 
  nav {
   flex: 1;
-  border: 1px solid black;
+  padding: 0;
  }
 
  section {
    flex: 2;
-  border: 1px solid black;
+   margin: 10px;
+  border: 1px solid #EADEDA;
+  background-color: #EADEDA;
  }

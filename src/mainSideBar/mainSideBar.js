@@ -10,8 +10,15 @@ export default function MainSideBar(props) {
         <>
           <ul className='foldersList'>
             {context.folders.map((folder) => (
-              <li key={folder.id}>
-                <NavLink to={`/folder/${folder.id}`}> {folder.name}</NavLink>
+              <li
+                key={folder.id}
+                className={
+                  folder.id === props.match.params.folderId ? 'selected' : ''
+                }
+              >
+                <NavLink to={`/folder/${folder.id}`} className='folder-list'>
+                  {folder.name}
+                </NavLink>
               </li>
             ))}
           </ul>

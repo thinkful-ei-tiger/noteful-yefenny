@@ -1,8 +1,9 @@
 
 .noteCard{
-    border: 1px solid black;
+    border: 1px solid #BFB8AD;
     padding: 10px;
     margin-right: 10px;
+    background-color: #BFB8AD;
   
 }
 

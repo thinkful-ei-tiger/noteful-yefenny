@@ -2,11 +2,16 @@
     padding: 10px 0;
 }
 
+.foldersList ul {
+    padding: 0;
+}
+
 .foldersList li {
-    border: 1px solid black;
+    border: 1px solid #EADEDA;
     text-align: center;
     list-style: none;
     padding: 30px;
+    margin: 0px 20px 20px 20px;
 }
 
 .foldersList li a {
@@ -15,7 +20,7 @@
     text-decoration: none;
 }
 
-.active {
+ .selected {
     background-color: gray;
     color: blanchedalmond;
 }
