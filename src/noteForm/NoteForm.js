@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './NoteForm.css';
+import PropType from 'prop-types';
 import ValidationError from '../validationError/ValidationError';
 export default class NoteForm extends Component {
   constructor(props) {
@@ -178,3 +179,10 @@ export default class NoteForm extends Component {
     );
   }
 }
+NoteForm.defaultProps = {
+  folders: []
+};
+
+NoteForm.protoType = {
+  folders: PropType.array
+};

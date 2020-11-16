@@ -5,7 +5,7 @@ import { shallow } from 'enzyme';
 import toJson from 'enzyme-to-json';
 import NoteCard from './noteCard';
 
-describe('BackBar component', () => {
+describe('NoteCard component', () => {
   it('render without crushing', () => {
     const div = document.createElement('div');
     ReactDOM.render(
