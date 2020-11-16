@@ -1,7 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import NotefulContext from '../NotefulContext';
-import NoteFulContext from '../NotefulContext';
+import { format } from 'date-fns';
+import cancel from '../images/cancel.svg';
 import './noteCard.css';
 
 function deleteCard(id, cb) {
@@ -22,6 +23,7 @@ function deleteCard(id, cb) {
 
 export default function NoteCard(props) {
   const { note } = props;
+  const dateModified = new Date(note.modified);
   return (
     <NotefulContext.Consumer>
       {(context) => {
@@ -31,10 +33,14 @@ export default function NoteCard(props) {
               <h2>{note.name}</h2>
             </Link>
             <div className='noteInfo'>
-              <span> Date modified on {note.modified}</span>
-              <button onClick={() => deleteCard(note.id, context.deleteNote)}>
-                {' '}
-                Delete Note
+              <span> modified on {format(dateModified, 'do MMM yyyy')}</span>
+              <button
+                onClick={() => {
+                  deleteCard(note.id, context.deleteNote);
+                }}
+                className='deleteNote'
+              >
+                <img src={cancel} alt='delete-icon' className='can-img' />
               </button>
             </div>
           </div>

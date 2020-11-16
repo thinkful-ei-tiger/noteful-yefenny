@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import { Route, Link } from 'react-router-dom';
+import { Route, Redirect } from 'react-router-dom';
 import STORE from './dummy-store';
 import NotefulContext from './NotefulContext';
 import Header from './header/header';
@@ -8,6 +8,10 @@ import MainSideBar from './mainSideBar/mainSideBar';
 import MainNotes from './mainNotes/mainNotes';
 import BackBar from './backBar/backBar';
 import Note from './note/note';
+import FolderForm from './folderForm/FolderForm';
+import NoteForm from './noteForm/NoteForm';
+import NoteError from './errorBoundaries/NoteError';
+import FolderError from './errorBoundaries/FolderError';
 import './App.css';
 
 class App extends Component {
@@ -19,9 +23,12 @@ class App extends Component {
     };
   }
   deleteNote = (id) => {
-    this.setState({
-      notes: this.state.notes.filter((note) => note.id !== id)
-    });
+    this.setState(
+      {
+        notes: this.state.notes.filter((note) => note.id !== id)
+      },
+      () => <Redirect to='/' />
+    );
   };
   componentDidMount() {
     fetch(`http://localhost:9090/db`)
@@ -42,6 +49,47 @@ class App extends Component {
         console.log(error.message);
       });
   }
+
+  fetchFolders = (cb) => {
+    fetch(`http://localhost:9090/folders`)
+      .then((res) => {
+        if (!res.ok) {
+          res.json();
+          Promise.reject(res.statusText);
+        }
+        return res.json();
+      })
+      .then((folders) => {
+        this.setState(
+          {
+            folders
+          },
+          () => {
+            return cb;
+          }
+        );
+      });
+  };
+  fetchNotes = (cb) => {
+    fetch(`http://localhost:9090/notes`)
+      .then((res) => {
+        if (!res.ok) {
+          res.json();
+          Promise.reject(res.statusText);
+        }
+        return res.json();
+      })
+      .then((notes) => {
+        this.setState(
+          {
+            notes
+          },
+          () => {
+            return cb;
+          }
+        );
+      });
+  };
   render() {
     const contextValue = {
       folders: this.state.folders,
@@ -54,14 +102,38 @@ class App extends Component {
           <Header />
           <main className='Main'>
             <nav>
-              <Route exact path='/' component={MainSideBar} />
-              <Route path='/folder/:folderId' component={MainSideBar} />
+              <FolderError>
+                <Route exact path='/' component={MainSideBar} />
+                <Route path='/folder/:folderId' component={MainSideBar} />
+              </FolderError>
+              <Route path='/new/folder' component={BackBar} />
               <Route path='/note/:noteID' component={BackBar} />
             </nav>
             <section>
-              <Route exact path='/' component={MainNotes} />
-              <Route path='/folder/:folderId' component={MainNotes} />
-              <Route path='/note/:noteId' component={Note} />
+              <NoteError>
+                <Route exact path='/' component={MainNotes} />
+                <Route path='/folder/:folderId' component={MainNotes} />
+                <Route
+                  path='/new/folder'
+                  render={({ history }) => (
+                    <FolderForm
+                      fetchFolders={this.fetchFolders}
+                      history={history}
+                    />
+                  )}
+                />
+                <Route path='/note/:noteId' component={Note} />
+              </NoteError>
+              <Route
+                path='/new/note'
+                render={({ history }) => (
+                  <NoteForm
+                    folders={this.state.folders}
+                    fetchNotes={this.fetchNotes}
+                    history={history}
+                  />
+                )}
+              />
             </section>
           </main>
         </div>

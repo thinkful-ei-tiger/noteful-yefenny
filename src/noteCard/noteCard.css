@@ -4,11 +4,13 @@
     padding: 10px;
     margin-right: 10px;
     background-color: #BFB8AD;
+    box-shadow: 2px 2px 4px #998888;
   
 }
 
 .noteCard  h2 {
-    font-size: 18px;
+    font-size: 19px;
+    color: #2C2626
 }
 
 .noteCard a {
@@ -23,5 +25,13 @@
 }
 
 .noteInfo span {
-    font-size: 12px;
+    font-size: 15px;
 }
+
+.deleteNote {
+    background-color: #BFB8AD;
+    border: none;
+}
+ .can-img {
+     width: 20px;
+ }
