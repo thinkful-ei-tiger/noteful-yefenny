@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
 import { Route, Redirect } from 'react-router-dom';
-import STORE from './dummy-store';
 import NotefulContext from './NotefulContext';
 import Header from './header/header';
 import MainSideBar from './mainSideBar/mainSideBar';

@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import NotefulContext from '../NotefulContext';
 import { format } from 'date-fns';
 import cancel from '../images/cancel.svg';
+import PropTypes from 'prop-types';
 import './noteCard.css';
 
 function deleteCard(id, cb) {
@@ -52,4 +53,8 @@ export default function NoteCard(props) {
 
 NoteCard.defaultProps = {
   note: {}
+};
+
+NoteCard.propTypes = {
+  note: PropTypes.object
 };

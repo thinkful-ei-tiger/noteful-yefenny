@@ -1,6 +1,7 @@
 import React from 'react';
 import NotefulContext from '../NotefulContext';
 import NoteCard from '../noteCard/noteCard';
+import PropTypes from 'prop-types';
 import './note.css';
 
 export default function Note(props) {
@@ -20,3 +21,7 @@ export default function Note(props) {
     </NotefulContext.Consumer>
   );
 }
+
+Note.propTypes = {
+  note: PropTypes.object
+};

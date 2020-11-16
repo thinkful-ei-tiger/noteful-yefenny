@@ -27,10 +27,9 @@ export default function MainNotes(props) {
               to={{
                 pathname: '/new/note',
                 state: {
-                  folderid: props.match.params.folderId || ''
+                  folderId: props.match.params.folderId || ''
                 }
               }}
-              folderId='hola'
             >
               <span>
                 <img src={addButton} alt='Add new note image' />

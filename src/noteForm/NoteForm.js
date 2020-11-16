@@ -19,10 +19,10 @@ export default class NoteForm extends Component {
     };
   }
   componentDidMount() {
-    const { folderid } = this.props.history.location.state;
+    const { folderId } = this.props.history.location.state;
     this.setState({
       folderId: {
-        value: folderid,
+        value: folderId,
         start: false
       }
     });
