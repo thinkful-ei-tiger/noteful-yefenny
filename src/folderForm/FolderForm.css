@@ -1,0 +1,20 @@
+.registration {
+    margin: 40px;
+    display: flex;
+    flex-direction: column;
+}
+
+.registration button {
+    font-family: 'Big Shoulders Inline Text', cursive;
+    font-size: 16px;
+    margin-top: 10px;
+    padding: 5px;
+    border: none;
+    background-color: #BFB8AD;
+}
+
+.folder-group {
+    display: flex;
+    flex-direction: column;
+
+}

@@ -30,11 +30,10 @@ export default function MainNotes(props) {
                   folderId: props.match.params.folderId || ''
                 }
               }}
+              className='addNotes'
             >
-              <span>
-                <img src={addButton} alt='Add new note image' />
-                Add note
-              </span>
+              <img src={addButton} alt='Add new note image' />
+              <span>Add note</span>
             </Link>
           </div>
         );

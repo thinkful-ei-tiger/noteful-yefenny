@@ -1,7 +1,10 @@
 .back-button{
-    border: 1px solid black;
-    font-size: 16px;
+    font-family: 'Big Shoulders Inline Text', cursive;
+    border: 1px solid #EADEDA;
+    font-size: 18px;
     padding: 20px;
     color: black;
-    background-color: gray;
+    padding: 20px;
+    background-color: #998888;
 }
+

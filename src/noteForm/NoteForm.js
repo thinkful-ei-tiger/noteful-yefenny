@@ -151,7 +151,7 @@ export default class NoteForm extends Component {
             </select>
             <ValidationError message={this.validateFolder()} />
           </div>
-          <div>
+          <div className='content'>
             <label htmlFor='content'>Content </label>
             <textarea
               name='content'

@@ -8,8 +8,8 @@ export default function MainSideBar(props) {
   return (
     <NotefulContext.Consumer>
       {(context) => (
-        <div>
-          <ul className='foldersList'>
+        <div className='foldersList'>
+          <ul>
             {context.folders.map((folder) => (
               <li
                 key={folder.id}
@@ -23,8 +23,8 @@ export default function MainSideBar(props) {
               </li>
             ))}
           </ul>
-          <Link to='/new/folder'>
-            <img src={addImage} alt='' />
+          <Link to='/new/folder' className='addFolder'>
+            <img src={addImage} alt='add folder' />
           </Link>
         </div>
       )}

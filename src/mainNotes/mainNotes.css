@@ -1,5 +1,6 @@
 
 .notesList{
+
     margin: 0;
     padding: 0;
 }
@@ -8,4 +9,22 @@
     padding: 10px;
 }
 
+.addNotes {
+    text-decoration: none;
+    display: flex;
+    justify-content: center;
+    padding: 0;
+}
+
+.addNotes span {
+    font-size: 18px;
+   padding-top: 5px;
+   color: black;
+}
+
+.addNotes  img{
+    width: 45px;
+    padding: 0;
+    margin: 0;
+}
 

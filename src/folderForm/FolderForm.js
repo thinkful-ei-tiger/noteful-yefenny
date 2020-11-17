@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import ValidationError from '../validationError/ValidationError';
+import './FolderForm.css';
 
 export default class FolderForm extends Component {
   constructor(props) {
@@ -53,30 +54,32 @@ export default class FolderForm extends Component {
 
   render() {
     return (
-      <form className='registration' onSubmit={(e) => this.handleSubmit(e)}>
-        <h2>New folder</h2>
-        <div className='form-group'>
-          <label htmlFor='name'>Name </label>
-          <input
-            type='text'
-            className='registration__control'
-            name='name'
-            id='name'
-            onChange={(e) => {
-              this.updateName(e.target.value);
-            }}
-            required
-          />
-          <ValidationError message={this.validateName()} />
-        </div>
-        <button
-          type='submit'
-          className='registration__button'
-          disabled={this.validateName()}
-        >
-          Save
-        </button>
-      </form>
+      <div className='registration'>
+        <form onSubmit={(e) => this.handleSubmit(e)}>
+          <h2>New folder</h2>
+          <div className='form-group'>
+            <label htmlFor='name'>Name </label>
+            <input
+              type='text'
+              className='registration__control'
+              name='name'
+              id='name'
+              onChange={(e) => {
+                this.updateName(e.target.value);
+              }}
+              required
+            />
+            <ValidationError message={this.validateName()} />
+          </div>
+          <button
+            type='submit'
+            className='registration__button'
+            disabled={this.validateName()}
+          >
+            Save
+          </button>
+        </form>
+      </div>
     );
   }
 }
