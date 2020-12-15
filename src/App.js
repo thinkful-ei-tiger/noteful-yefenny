@@ -6,8 +6,8 @@ import MainSideBar from './mainSideBar/mainSideBar';
 import MainNotes from './mainNotes/mainNotes';
 import BackBar from './backBar/backBar';
 import Note from './note/note';
-import FolderForm from './folderForm/FolderForm';
-import NoteForm from './noteForm/NoteForm';
+import AddFolder from './AddFolder/AddFolder';
+import AddNote from './AddNote/AddNote';
 import NoteError from './errorBoundaries/NoteError';
 import FolderError from './errorBoundaries/FolderError';
 import './App.css';
@@ -115,7 +115,7 @@ class App extends Component {
                 <Route
                   path='/new/folder'
                   render={({ history }) => (
-                    <FolderForm
+                    <AddFolder
                       fetchFolders={this.fetchFolders}
                       history={history}
                     />
@@ -126,7 +126,7 @@ class App extends Component {
               <Route
                 path='/new/note'
                 render={({ history }) => (
-                  <NoteForm
+                  <AddNote
                     folders={this.state.folders}
                     fetchNotes={this.fetchNotes}
                     history={history}

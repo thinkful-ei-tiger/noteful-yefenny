@@ -1,11 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import NoteForm from './NoteForm';
+import AddNote from './AddNote';
 
-describe('NoteForm component', () => {
+describe('AddNote component', () => {
   it('render without crushing', () => {
     const div = document.createElement('div');
-    ReactDOM.render(<NoteForm />, div);
+    ReactDOM.render(<AddNote />, div);
     ReactDOM.unmountComponentAtNode();
   });
 });

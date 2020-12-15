@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import './NoteForm.css';
+import './AddNote.css';
 import PropType from 'prop-types';
 import ValidationError from '../validationError/ValidationError';
-export default class NoteForm extends Component {
+export default class AddNote extends Component {
   constructor(props) {
     super(props);
     this.folder = React.createRef();
@@ -179,10 +179,10 @@ export default class NoteForm extends Component {
     );
   }
 }
-NoteForm.defaultProps = {
+AddNote.defaultProps = {
   folders: []
 };
 
-NoteForm.protoType = {
+AddNote.protoType = {
   folders: PropType.array
 };

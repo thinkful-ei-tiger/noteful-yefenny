@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import ValidationError from '../validationError/ValidationError';
-import './FolderForm.css';
+import './AddFolder.css';
 
-export default class FolderForm extends Component {
+export default class AddFolder extends Component {
   constructor(props) {
     super(props);
     this.state = {
