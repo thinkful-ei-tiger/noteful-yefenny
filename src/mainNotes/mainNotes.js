@@ -19,7 +19,7 @@ export default function MainNotes(props) {
             <ul className='notesList'>
               {notes.map((note) => (
                 <li key={note.id}>
-                  <NoteCard note={note} />
+                  <NoteCard note={note} history={props.history} />
                 </li>
               ))}
             </ul>

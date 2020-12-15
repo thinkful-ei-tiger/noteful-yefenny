@@ -8,7 +8,7 @@ import './noteCard.css';
 import { render } from '@testing-library/react';
 
 export default class NoteCard extends Component {
-  deleteCard = (id, cb) => {
+  deleteCard = (id, cb, history) => {
     fetch(`http://localhost:9090/notes/${id}`, { method: 'DELETE' })
       .then((res) => {
         if (!res.ok) {
@@ -17,7 +17,8 @@ export default class NoteCard extends Component {
         }
       })
       .then((data) => {
-        this.props.onDelete();
+        console.log(history);
+        history.push('/');
         cb(id);
       })
       .catch((error) => {
@@ -41,7 +42,11 @@ export default class NoteCard extends Component {
                 <span>modified on {dateModified}</span>
                 <button
                   onClick={() => {
-                    this.deleteCard(note.id, context.deleteNote);
+                    this.deleteCard(
+                      note.id,
+                      context.deleteNote,
+                      this.props.history
+                    );
                   }}
                   className='deleteNote'
                 >

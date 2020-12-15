@@ -17,7 +17,7 @@ class Note extends Component {
 
           return (
             <div className='note'>
-              <NoteCard note={note} onDelete={this.onDelete} />
+              <NoteCard note={note} history={this.props.history} />
               <p>{note.content}</p>
             </div>
           );
@@ -31,7 +31,7 @@ Note.defaultProps = {
   notes: []
 };
 Note.propTypes = {
-  notes: PropTypes.array
+  notes: PropTypes.array.isRequired
 };
 
 export default withRouter(Note);
