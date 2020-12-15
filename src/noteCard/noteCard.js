@@ -26,7 +26,9 @@ export default class NoteCard extends Component {
   };
   render() {
     const { note } = this.props;
-    const dateModified = new Date(note.modified);
+    let dateModified = note.modified
+      ? format(new Date(note.modified), 'do MMM yyyy')
+      : '';
     return (
       <NotefulContext.Consumer>
         {(context) => {
@@ -36,7 +38,7 @@ export default class NoteCard extends Component {
                 <h2>{note.name}</h2>
               </Link>
               <div className='noteInfo'>
-                <span> modified on {format(dateModified, 'do MMM yyyy')}</span>
+                <span>modified on {dateModified}</span>
                 <button
                   onClick={() => {
                     this.deleteCard(note.id, context.deleteNote);
@@ -55,7 +57,9 @@ export default class NoteCard extends Component {
 }
 
 NoteCard.defaultProps = {
-  note: {}
+  note: {
+    modified: new Date()
+  }
 };
 
 NoteCard.propTypes = {

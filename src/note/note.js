@@ -6,20 +6,23 @@ import PropTypes from 'prop-types';
 import './note.css';
 
 class Note extends Component {
-  static contextType = NotefulContext;
-  onDelete = () => {
-    this.props.history.push('/');
-  };
   render() {
-    const { notes } = this.context;
-    const note = notes.find(
-      (note) => note.id === this.props.match.params.noteId
-    );
     return (
-      <div className='note'>
-        <NoteCard note={note} onDelete={this.onDelete} />
-        <p>{note.content}</p>
-      </div>
+      <NotefulContext.Consumer>
+        {(context) => {
+          const { notes = [] } = context;
+          const note = notes.find(
+            (note) => note.id === this.props.match.params.noteId
+          ) || { content: '' };
+
+          return (
+            <div className='note'>
+              <NoteCard note={note} onDelete={this.onDelete} />
+              <p>{note.content}</p>
+            </div>
+          );
+        }}
+      </NotefulContext.Consumer>
     );
   }
 }

@@ -106,7 +106,7 @@ class App extends Component {
               </FolderError>
               <Route path='/new/folder' component={BackBar} />
               <Route path='/new/note' component={BackBar} />
-              <Route path='/note/:noteID' component={BackBar} />
+              <Route path='/note/:noteId' component={BackBar} />
             </nav>
             <section>
               <NoteError>
