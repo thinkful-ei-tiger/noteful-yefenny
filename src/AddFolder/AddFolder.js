@@ -49,6 +49,9 @@ export default class AddFolder extends Component {
       })
       .then((data) => {
         this.props.fetchFolders(this.props.history.push('/'));
+      })
+      .catch((error) => {
+        console.log(error.message);
       });
   };
 

@@ -106,7 +106,8 @@ export default class AddNote extends Component {
       })
       .then((data) => {
         this.props.fetchNotes(this.props.history.push('/'));
-      });
+      })
+      .catch((error) => console.log(error.message));
   };
 
   render() {

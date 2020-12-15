@@ -66,6 +66,9 @@ class App extends Component {
             return cb;
           }
         );
+      })
+      .catch((error) => {
+        console.log(error.message);
       });
   };
   fetchNotes = (cb) => {
@@ -86,6 +89,9 @@ class App extends Component {
             return cb;
           }
         );
+      })
+      .catch((error) => {
+        console.log(error.message);
       });
   };
   render() {
