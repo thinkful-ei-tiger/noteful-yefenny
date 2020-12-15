@@ -33,7 +33,7 @@ export default class AddFolder extends Component {
       name: this.state.name
     };
     const URL = 'http://localhost:9090/folders/';
-    console.log(this.props);
+
     fetch(URL, {
       method: 'POST',
       headers: {

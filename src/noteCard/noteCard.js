@@ -5,7 +5,6 @@ import { format } from 'date-fns';
 import cancel from '../images/cancel.svg';
 import PropTypes from 'prop-types';
 import './noteCard.css';
-import { render } from '@testing-library/react';
 
 export default class NoteCard extends Component {
   deleteCard = (id, cb, history) => {
@@ -17,7 +16,6 @@ export default class NoteCard extends Component {
         }
       })
       .then((data) => {
-        console.log(history);
         history.push('/');
         cb(id);
       })
@@ -26,27 +24,23 @@ export default class NoteCard extends Component {
       });
   };
   render() {
-    const { note } = this.props;
-    let dateModified = note.modified
-      ? format(new Date(note.modified), 'do MMM yyyy')
+    const { id, name, modified } = this.props;
+    let dateModified = modified
+      ? format(new Date(modified), 'do MMM yyyy')
       : '';
     return (
       <NotefulContext.Consumer>
         {(context) => {
           return (
             <div className='noteCard'>
-              <Link to={`/note/${note.id}`}>
-                <h2>{note.name}</h2>
+              <Link to={`/note/${id}`}>
+                <h2>{name}</h2>
               </Link>
               <div className='noteInfo'>
                 <span>modified on {dateModified}</span>
                 <button
                   onClick={() => {
-                    this.deleteCard(
-                      note.id,
-                      context.deleteNote,
-                      this.props.history
-                    );
+                    this.deleteCard(id, context.deleteNote, this.props.history);
                   }}
                   className='deleteNote'
                 >
@@ -62,11 +56,13 @@ export default class NoteCard extends Component {
 }
 
 NoteCard.defaultProps = {
-  note: {
-    modified: new Date()
-  }
+  id: 'default-id',
+  name: 'default-name',
+  modified: '12/12/2020'
 };
 
 NoteCard.propTypes = {
-  note: PropTypes.object
+  id: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
+  modified: PropTypes.string.isRequired
 };

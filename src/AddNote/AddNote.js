@@ -184,5 +184,5 @@ AddNote.defaultProps = {
 };
 
 AddNote.protoType = {
-  folders: PropType.array
+  folders: PropType.array.isRequired
 };

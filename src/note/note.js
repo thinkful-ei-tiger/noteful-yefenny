@@ -17,7 +17,12 @@ class Note extends Component {
 
           return (
             <div className='note'>
-              <NoteCard note={note} history={this.props.history} />
+              <NoteCard
+                id={note.id}
+                name={note.name}
+                modified={note.modified}
+                history={this.props.history}
+              />
               <p>{note.content}</p>
             </div>
           );
@@ -28,10 +33,24 @@ class Note extends Component {
 }
 
 Note.defaultProps = {
-  notes: []
+  notes: [
+    {
+      id: 'default-id',
+      name: 'default-name',
+      modified: new Date(),
+      content: 'default-content'
+    }
+  ]
 };
 Note.propTypes = {
-  notes: PropTypes.array.isRequired
+  notes: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string.isRequired,
+      name: PropTypes.string.isRequired,
+      modified: PropTypes.date,
+      content: PropTypes.string
+    })
+  )
 };
 
 export default withRouter(Note);

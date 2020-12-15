@@ -19,7 +19,12 @@ export default function MainNotes(props) {
             <ul className='notesList'>
               {notes.map((note) => (
                 <li key={note.id}>
-                  <NoteCard note={note} history={props.history} />
+                  <NoteCard
+                    id={note.id}
+                    name={note.name}
+                    modified={note.modified}
+                    history={props.history}
+                  />
                 </li>
               ))}
             </ul>
@@ -32,7 +37,7 @@ export default function MainNotes(props) {
               }}
               className='addNotes'
             >
-              <img src={addButton} alt='Add new note image' />
+              <img src={addButton} alt='Add new note button' />
               <span>Add note</span>
             </Link>
           </div>
