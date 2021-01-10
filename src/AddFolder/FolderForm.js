@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
+import FoldersService from '../services/folders-service';
 import ValidationError from '../validationError/ValidationError';
-import './AddFolder.css';
+import './FolderForm.css';
 
-export default class AddFolder extends Component {
+export default class FolderForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -32,27 +33,9 @@ export default class AddFolder extends Component {
     const query = {
       name: this.state.name
     };
-    const URL = 'http://localhost:8000/api/folders/';
-
-    fetch(URL, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(query)
-    })
-      .then((res) => {
-        if (!res.ok) {
-          Promise.reject(res.statusText);
-        }
-        return res.json();
-      })
-      .then((data) => {
-        this.props.fetchFolders(this.props.history.push('/'));
-      })
-      .catch((error) => {
-        console.log(error.message);
-      });
+    FoldersService.createFolder(query).then((data) => {
+      this.props.fetchFolders(this.props.history.push('/'));
+    });
   };
 
   render() {

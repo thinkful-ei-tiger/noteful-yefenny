@@ -5,16 +5,11 @@ import { format } from 'date-fns';
 import cancel from '../images/cancel.svg';
 import PropTypes from 'prop-types';
 import './noteCard.css';
+import NotesService from '../services/notes-service';
 
 export default class NoteCard extends Component {
   deleteCard = (id, cb, history) => {
-    fetch(`http://localhost:9090/notes/${id}`, { method: 'DELETE' })
-      .then((res) => {
-        if (!res.ok) {
-          res.json();
-          throw new Error(res.statusText);
-        }
-      })
+    NotesService.deleteNote(id)
       .then((data) => {
         history.push('/');
         cb(id);
@@ -56,13 +51,13 @@ export default class NoteCard extends Component {
 }
 
 NoteCard.defaultProps = {
-  id: 'default-id',
+  id: 0,
   name: 'default-name',
   modified: '12/12/2020'
 };
 
 NoteCard.propTypes = {
-  id: PropTypes.string.isRequired,
+  id: PropTypes.number.isRequired,
   name: PropTypes.string.isRequired,
   modified: PropTypes.string.isRequired
 };

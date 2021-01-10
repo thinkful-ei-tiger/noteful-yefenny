@@ -2,17 +2,18 @@ import React, { Component } from 'react';
 import './AddNote.css';
 import PropType from 'prop-types';
 import ValidationError from '../validationError/ValidationError';
+import NotesService from '../services/notes-service';
 export default class AddNote extends Component {
   constructor(props) {
     super(props);
     this.folder = React.createRef();
-    this.folderId = this.state = {
+    this.folderid = this.state = {
       name: {
         value: '',
         start: false
       },
       modified: new Date(),
-      folderId: {
+      folderid: {
         value: '',
         click: false
       },
@@ -20,10 +21,10 @@ export default class AddNote extends Component {
     };
   }
   componentDidMount() {
-    const { folderId } = this.props.history.location.state;
+    const { folderid } = this.props.history.location.state;
     this.setState({
-      folderId: {
-        value: folderId,
+      folderid: {
+        value: folderid,
         start: false
       }
     });
@@ -37,12 +38,12 @@ export default class AddNote extends Component {
     });
   };
   updateFolder = (e) => {
-    const folderId = e.target.value;
+    const folderid = e.target.value;
     this.setState((prevState) => {
       return {
-        folderId: {
-          ...prevState.folderId,
-          value: folderId
+        folderid: {
+          ...prevState.folderid,
+          value: folderid
         }
       };
     });
@@ -50,8 +51,8 @@ export default class AddNote extends Component {
   folderClick = () => {
     this.setState((prevState) => {
       return {
-        folderId: {
-          ...prevState.folderId,
+        folderid: {
+          ...prevState.folderid,
           click: true
         }
       };
@@ -73,9 +74,9 @@ export default class AddNote extends Component {
     return false;
   };
   validateFolder = () => {
-    const folderId = this.state.folderId;
-    if (folderId.click) {
-      if (folderId.value.length < 1) {
+    const folderid = this.state.folderid;
+    if (folderid.click) {
+      if (folderid.value.length < 1) {
         return 'You should select a folder';
       }
     }
@@ -83,27 +84,14 @@ export default class AddNote extends Component {
   };
   handleSubmit = (e) => {
     e.preventDefault();
-    const URL = 'http://localhost:9090/notes/';
+
     const note = {
       name: this.state.name.value,
       modified: this.state.modified,
-      folderId: this.state.folderId.value,
+      folderid: this.state.folderid.value,
       content: this.state.content
     };
-    fetch(URL, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(note)
-    })
-      .then((res) => {
-        if (!res.ok) {
-          res.json();
-          Promise.reject(res.statusText);
-        }
-        return res.json();
-      })
+    NotesService.createNote(note)
       .then((data) => {
         this.props.fetchNotes(this.props.history.push('/'));
       })
@@ -141,7 +129,7 @@ export default class AddNote extends Component {
             <select
               name='folder'
               id='folder'
-              value={this.state.folderId.value}
+              value={this.state.folderid.value}
               onFocus={this.folderClick}
               onChange={(e) => {
                 this.updateFolder(e);
@@ -171,7 +159,7 @@ export default class AddNote extends Component {
           disabled={
             this.validateName() ||
             this.validateFolder() ||
-            (!this.state.folderId.click && this.state.folderId.value === '')
+            (!this.state.folderid.click && this.state.folderid.value === '')
           }
         >
           Save

@@ -17,3 +17,9 @@
   background-color: #EADEDA;
   padding: 0px;
  }
+
+ @media only screen and (min-width: 900px) {
+ .App {
+   padding: 0 30% ;
+ }
+}

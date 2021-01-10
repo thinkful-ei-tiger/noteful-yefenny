@@ -9,11 +9,12 @@ export default function MainNotes(props) {
   return (
     <NotefulContext.Consumer>
       {(context) => {
-        const notes = props.match.params.folderId
+        const notes = props.match.params.folderid
           ? context.notes.filter(
-              (note) => note.folderId === props.match.params.folderId
+              (note) => note.folderid === parseInt(props.match.params.folderid)
             )
           : context.notes;
+        console.log(notes);
         return (
           <div>
             <ul className='notesList'>
@@ -32,7 +33,7 @@ export default function MainNotes(props) {
               to={{
                 pathname: '/new/note',
                 state: {
-                  folderId: props.match.params.folderId || ''
+                  folderid: props.match.params.folderid || ''
                 }
               }}
               className='addNotes'

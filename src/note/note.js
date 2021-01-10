@@ -12,7 +12,7 @@ class Note extends Component {
         {(context) => {
           const { notes = [] } = context;
           const note = notes.find(
-            (note) => note.id === this.props.match.params.noteId
+            (note) => note.id === parseInt(this.props.match.params.noteId)
           ) || { content: '' };
 
           return (

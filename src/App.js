@@ -11,6 +11,8 @@ import AddNote from './AddNote/AddNote';
 import NoteError from './errorBoundaries/NoteError';
 import FolderError from './errorBoundaries/FolderError';
 import './App.css';
+import NotesService from './services/notes-service';
+import FoldersService from './services/folders-service';
 
 class App extends Component {
   constructor(props) {
@@ -29,34 +31,12 @@ class App extends Component {
     );
   };
   componentDidMount() {
-    fetch(`http://localhost:9090/db`)
-      .then((res) => {
-        if (!res.ok) {
-          res.json();
-          throw new Error(res.statusText);
-        }
-        return res.json();
-      })
-      .then((data) => {
-        this.setState({
-          folders: data.folders,
-          notes: data.notes
-        });
-      })
-      .catch((error) => {
-        console.log(error.message);
-      });
+    this.fetchFolders();
+    this.fetchNotes();
   }
 
   fetchFolders = (cb) => {
-    fetch(`http://localhost:9090/folders`)
-      .then((res) => {
-        if (!res.ok) {
-          res.json();
-          Promise.reject(res.statusText);
-        }
-        return res.json();
-      })
+    FoldersService.getAllFolders()
       .then((folders) => {
         this.setState(
           {
@@ -72,14 +52,7 @@ class App extends Component {
       });
   };
   fetchNotes = (cb) => {
-    fetch(`http://localhost:9090/notes`)
-      .then((res) => {
-        if (!res.ok) {
-          res.json();
-          Promise.reject(res.statusText);
-        }
-        return res.json();
-      })
+    NotesService.getAllNotes()
       .then((notes) => {
         this.setState(
           {
@@ -108,7 +81,7 @@ class App extends Component {
             <nav>
               <FolderError>
                 <Route exact path='/' component={MainSideBar} />
-                <Route path='/folder/:folderId' component={MainSideBar} />
+                <Route path='/folder/:folderid' component={MainSideBar} />
               </FolderError>
               <Route path='/new/folder' component={BackBar} />
               <Route path='/new/note' component={BackBar} />
@@ -117,7 +90,7 @@ class App extends Component {
             <section>
               <NoteError>
                 <Route exact path='/' component={MainNotes} />
-                <Route path='/folder/:folderId' component={MainNotes} />
+                <Route path='/folder/:folderid' component={MainNotes} />
                 <Route
                   path='/new/folder'
                   render={({ history }) => (
