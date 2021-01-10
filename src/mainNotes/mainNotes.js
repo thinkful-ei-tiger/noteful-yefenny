@@ -14,7 +14,7 @@ export default function MainNotes(props) {
               (note) => note.folderid === parseInt(props.match.params.folderid)
             )
           : context.notes;
-        console.log(notes);
+
         return (
           <div>
             <ul className='notesList'>
